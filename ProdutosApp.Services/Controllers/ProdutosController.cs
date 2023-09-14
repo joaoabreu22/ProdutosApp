@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ProdutosApp.Services.Models;
 
 namespace ProdutosApp.Services.Controllers
 {
@@ -7,39 +9,61 @@ namespace ProdutosApp.Services.Controllers
     public class ProdutosController : ControllerBase
     {
         /// <summary>
-        /// Método para cadastrar produtos na API
+        /// Serviço para cadastro de produtos.
         /// </summary>
         [HttpPost]
-        public IActionResult Post()
+        [ProducesResponseType(typeof(ProdutosGetModel), 201)]
+        public IActionResult Post([FromBody] ProdutosPostModel model)
         {
-            return Ok();
+            //HTTP 201 - CREATED!
+            return StatusCode(201);
         }
 
         /// <summary>
-        /// Método para atualizar produtos na API
+        /// Serviço para edição de produtos.
         /// </summary>
         [HttpPut]
-        public IActionResult Put()
+        [ProducesResponseType(typeof(ProdutosGetModel), 200)]
+        public IActionResult Put([FromBody] ProdutosPutModel model)
         {
-            return Ok();
+            //HTTP 200 - OK!
+            return StatusCode(200);
         }
 
         /// <summary>
-        /// Método para excluir produtos na API
+        /// Serviço para exclusão de produtos.
         /// </summary>
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(ProdutosGetModel), 200)]
+        public IActionResult Delete(Guid id)
         {
-            return Ok();
+            //HTTP 200 - OK!
+            return StatusCode(200);
         }
 
         /// <summary>
-        /// Método para consultar produtos na API
+        /// Serviço para consulta de produtos.
         /// </summary>
         [HttpGet]
-        public IActionResult Get()
+        [ProducesResponseType(typeof(List<ProdutosGetModel>), 200)]
+        public IActionResult GetAll()
         {
-            return Ok();
+            //HTTP 200 - OK!
+            return StatusCode(200);
+        }
+
+        /// <summary>
+        /// Serviço para consulta de 1 produto através do ID (código identificador).
+        /// </summary>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ProdutosGetModel), 200)]
+        public IActionResult GetById(Guid id)
+        {
+            //HTTP 200 - OK!
+            return StatusCode(200);
         }
     }
 }
+
+
+
